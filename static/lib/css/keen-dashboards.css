@@ -4,7 +4,7 @@
  */
 
 body.application {
-  background: #000;
+  background: #F9BE2C;
   padding: 60px 20px 0;
 }
 body.application > .container-fluid {
@@ -28,8 +28,8 @@ body.application hr {
 
 
 .navbar-inverse {
-  background-color: #3d4a57;
-  border-color: #333;
+  background-color: #F9BE2C;
+  border-color: #ffffff;
 }
 .navbar-inverse .navbar-nav > li > a,
 .navbar a.navbar-brand {
