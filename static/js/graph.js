@@ -5,11 +5,12 @@ queue()
    .defer(d3.json, "/donorsUS/projects")
    .await(makeGraphs);
 
-function makeGraphs(error, projectsJson) {
-
 $(window).load(function() {
     $(".loader").fadeOut("fast");
 })
+
+function makeGraphs(error, projectsJson) {
+
 
    //Clean projectsJson data
    var donorsUSProjects = projectsJson;
