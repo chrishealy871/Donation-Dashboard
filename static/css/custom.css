@@ -69,8 +69,10 @@
    font-weight: bold;
 }
 
-#intro_button {
-   padding-top: 10px;
+.intro_button {
+   padding-top: 15px;
+   border-radius: 25px;
+   mso-border-shadow: 5px;
 }
 
 body{
