@@ -6,10 +6,10 @@ queue()
    .await(makeGraphs);
 
 function makeGraphs(error, projectsJson) {
+
 $(window).load(function() {
     $(".loader").fadeOut("fast");
 })
-
 
    //Clean projectsJson data
    var donorsUSProjects = projectsJson;
