@@ -7,7 +7,7 @@ queue()
 
 function makeGraphs(error, projectsJson) {
     document.getElementById("loading").style.display="none";
-    document.getElementById("blocks").style.display="inline-block";
+    document.getElementById("blocks").style.display="block";
 
 
    //Clean projectsJson data
