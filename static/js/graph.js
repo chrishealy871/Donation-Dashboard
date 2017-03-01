@@ -6,8 +6,9 @@ queue()
    .await(makeGraphs);
 
 function makeGraphs(error, projectsJson) {
-    document.getElementById("loading").style.display="none";
-    document.getElementById("blocks").style.display="inline-block";
+$(window).load(function() {
+    $(".loader").fadeOut("fast");
+})
 
 
    //Clean projectsJson data
