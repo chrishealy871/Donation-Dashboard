@@ -4,7 +4,7 @@
  */
 
 body.application {
-  background: #f2f2f2;
+  background: #000;
   padding: 60px 20px 0;
 }
 body.application > .container-fluid {
@@ -21,7 +21,7 @@ body.application div[class^="col-"] div[class^="col-"] {
 }
 
 body.application hr {
-  border-color: #d7d7d7;
+  border-color: #000;
   margin: 10px 0;
 }
 

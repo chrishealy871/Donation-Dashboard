@@ -6,6 +6,9 @@ queue()
    .await(makeGraphs);
 
 function makeGraphs(error, projectsJson) {
+    document.getElementById("loading").style.display="none";
+    document.getElementById("blocks").style.display="inline-block";
+
 
    //Clean projectsJson data
    var donorsUSProjects = projectsJson;
@@ -41,12 +44,17 @@ function makeGraphs(error, projectsJson) {
        return d["funding_status"];
    });
 
+   var primaryFocusDim = ndx.dimension(function (d) {
+       return d["primary_focus_area"];
+   });
+
 
    //Calculate metrics
    var numProjectsByDate = dateDim.group();
    var numProjectsByResourceType = resourceTypeDim.group();
    var numProjectsByPovertyLevel = povertyLevelDim.group();
    var numProjectsByFundingStatus = fundingStatus.group();
+   var numProjectsByPrimaryFocus = primaryFocusDim.group();
    var totalDonationsByState = stateDim.group().reduceSum(function (d) {
        return d["total_donations"];
    });
@@ -71,6 +79,7 @@ function makeGraphs(error, projectsJson) {
    var numberProjectsND = dc.numberDisplay("#number-projects-nd");
    var totalDonationsND = dc.numberDisplay("#total-donations-nd");
    var fundingStatusChart = dc.pieChart("#funding-chart");
+   var primaryFocusChart = dc.rowChart("#primary-focus-row-chart");
 
 
    selectField = dc.selectMenu('#menu-select')
@@ -94,7 +103,7 @@ function makeGraphs(error, projectsJson) {
        .formatNumber(d3.format(".3s"));
 
  timeChart
-       .width(800)
+       .width(1000)
        .height(200)
        .margins({top: 10, right: 50, bottom: 30, left: 50})
        .dimension(dateDim)
@@ -106,26 +115,39 @@ function makeGraphs(error, projectsJson) {
        .yAxis().ticks(4);
 
    resourceTypeChart
-       .width(300)
+        .ordinalColors([ "#ffd847" , "#f58277" , "#6dc2e8","#9178ea", "#07b6ca", "#ffbd49"])
+       .width(600)
        .height(250)
        .dimension(resourceTypeDim)
        .group(numProjectsByResourceType)
        .xAxis().ticks(4);
 
+    primaryFocusChart
+        .ordinalColors([ "#ffd847" , "#f58277" , "#6dc2e8","#07b6ca","#9178ea","#ffbd49", "#3ce6ab"])
+       .width(600)
+       .height(250)
+       .dimension(primaryFocusDim)
+       .group(numProjectsByPrimaryFocus)
+       .xAxis().ticks(4);
+
    povertyLevelChart
-       .width(300)
+       .ordinalColors([ "#ffd847" , "#f58277" , "#6dc2e8","#9178ea"])
+       .width(600)
        .height(250)
        .dimension(povertyLevelDim)
        .group(numProjectsByPovertyLevel)
        .xAxis().ticks(4);
 
    fundingStatusChart
-       .height(220)
+        .ordinalColors([ "#f58277" , "#6dc2e8" , "#ffd847" ])
+       .height(250)
+       .width(600)
        .radius(90)
        .innerRadius(40)
        .transitionDuration(1500)
        .dimension(fundingStatus)
        .group(numProjectsByFundingStatus);
+
 
 
    dc.renderAll();
